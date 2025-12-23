@@ -3,6 +3,7 @@ import Login from "./pages/Login";
 import ProtectedRoute from "./components/ProtectedRoute";
 import Users from "./pages/Users";
 import { useAuth } from "./context/useAuth";
+import MainLayout from "./components/templates/MainLayout";
 
 const RootRedirect = () => {
   const { token } = useAuth()
@@ -15,9 +16,13 @@ export default function App() {
       <Routes>
         <Route path="/" element={<RootRedirect />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/users" element={<ProtectedRoute>
-          <Users />
-        </ProtectedRoute>} />
+        <Route path="/users" element={
+          <ProtectedRoute>
+            <MainLayout>
+              <Users />
+            </MainLayout>
+          </ProtectedRoute>
+        } />
       </Routes>
     </BrowserRouter>
   )
