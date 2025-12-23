@@ -1,7 +1,7 @@
 import React from 'react'
 
 const Button = ({ children, onClick, type = "button", variant = "primary", disabled = false }) => {
-    const base = 'px-4 py-2 rounded text-white cursor-pointer border-none focus:outline-none focus:ring-2 focus:ring-offset-2 transition duration-200'
+    const base = 'cursor-pointer px-4 py-2 rounded text-white border-none focus:outline-none focus:ring-2 focus:ring-offset-2 transition duration-200'
     const disabledClass = 'disabled:bg-gray-400 disabled:cursor-not-allowed'
     const styles = {
         primary: 'bg-blue-500 hover:bg-blue-600',

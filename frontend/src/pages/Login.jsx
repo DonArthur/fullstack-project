@@ -3,8 +3,10 @@ import { login as loginApi } from "../api/auth";
 import { useAuth } from "../context/useAuth";
 import Button from "../components/atoms/Button";
 import Input from "../components/atoms/Input";
+import { useNavigate } from "react-router-dom";
 
 export default function Login() {
+    const navigate = useNavigate();
     const { login } = useAuth()
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -12,8 +14,8 @@ export default function Login() {
     const submit = async (e) => {
         e.preventDefault()
         const res = await loginApi({ email, password })
-        login(res.data.token)
-        window.location.href = '/users'
+        login(res.data.token, res.data.userDetails)
+        navigate('/dashboard')
     }
 
     return (
@@ -24,7 +26,7 @@ export default function Login() {
                 <Input id="email" type="text" placeholder="Email" onChange={(e) => setEmail(e.target.value)} />
                 <label htmlFor="password" className="block mb-2">Password</label>
                 <Input id="password" type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} />
-                <Button onClick={submit}>Login</Button>
+                <Button type='submit'>Login</Button>
             </form>
         </div>
     )

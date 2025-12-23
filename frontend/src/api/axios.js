@@ -1,4 +1,5 @@
 import axios from "axios";
+import { navigate } from "../components/helpers/navigate";
 
 const api = axios.create({
     baseURL: import.meta.env.VITE_API_BASE_URL,
@@ -20,7 +21,7 @@ api.interceptors.response.use(
     (error) => {
         if (error && error.response && (error.response.status === 403 || error.response.status === 401)) {
             localStorage.removeItem('token')
-            window.location.href = '/login'
+            navigate('/login')
         }
         return Promise.reject(error)
     }

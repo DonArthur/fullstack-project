@@ -27,7 +27,8 @@ public class UserService {
         return new UserResponse(
                 savedUser.getId(),
                 savedUser.getName(),
-                savedUser.getEmail()
+                savedUser.getEmail(),
+                savedUser.getRole()
         );
     }
 
@@ -35,7 +36,8 @@ public class UserService {
         return userRepository.findAll().stream().map(user -> new UserResponse(
                 user.getId(),
                 user.getName(),
-                user.getEmail()
+                user.getEmail(),
+                user.getRole()
         )).toList();
     }
 
@@ -46,7 +48,8 @@ public class UserService {
         return new UserResponse(
                 user.getId(),
                 user.getName(),
-                user.getEmail()
+                user.getEmail(),
+                user.getRole()
         );
     }
 
@@ -62,7 +65,8 @@ public class UserService {
         return new UserResponse(
                 updatedUser.getId(),
                 updatedUser.getName(),
-                updatedUser.getEmail()
+                updatedUser.getEmail(),
+                updatedUser.getRole()
         );
     }
 

@@ -1,5 +1,6 @@
 import React from 'react'
-import { useAuth } from '../context/useAuth'
+import { useAuth } from '../../context/useAuth'
+import Button from '../atoms/Button'
 
 const Navbar = () => {
     const { token, logout } = useAuth()
@@ -9,12 +10,12 @@ const Navbar = () => {
             <div className='font-bold text-lg'>My App</div>
             {
                 token && (
-                    <button
+                    <Button
                         onClick={logout}
-                        className='bg-red-500 px-4 py-2 rounded hover:bg-red-600'
+                        variant="danger"
                     >
                         Logout
-                    </button>)
+                    </Button>)
             }
         </nav>
     )
