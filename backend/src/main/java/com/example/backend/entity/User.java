@@ -1,6 +1,10 @@
 package com.example.backend.entity;
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "users")
@@ -20,6 +24,17 @@ public class User {
 
     @Column(nullable = false)
     private String role;
+
+    @Column(nullable = false)
+    private String phoneNum;
+
+    private String avatarUrl;
+
+    @CreationTimestamp
+    private LocalDateTime createdAt;
+
+    @UpdateTimestamp
+    private LocalDateTime updatedAt;
 
     public User() {}
 
@@ -67,4 +82,12 @@ public class User {
     public void setRole(String role) {
         this.role = role;
     }
+
+    public String getPhoneNum() { return phoneNum; }
+
+    public void setPhoneNum(String phoneNum) { this.phoneNum = phoneNum; }
+
+    public String getAvatarUrl() { return avatarUrl; }
+
+    public void setAvatarUrl(String avatarUrl) { this.avatarUrl = avatarUrl; }
 }

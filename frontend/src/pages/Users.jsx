@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import api from '../api/axios'
+import DataTable from '../components/molecules/DataTable'
 
 const Users = () => {
     const [users, setUsers] = useState([])
@@ -11,12 +12,10 @@ const Users = () => {
     }, [])
   return (
     <div>
-        <span className='text-3xl font-bold underline'>Users</span>
-        <ul>
-            {users.map(user => (
-                <li key={user.id}>{user.email}</li>
-            ))}
-        </ul>
+        <span className='text-2xl font-bold'>Users</span>
+        <div className='my-3 p-4 bg-white shadow rounded overflow-x-auto'>
+            <DataTable columnsArr={['Name', 'Email', 'Role']} data={users} />
+        </div>
     </div>
   )
 }
