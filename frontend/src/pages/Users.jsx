@@ -12,7 +12,7 @@ const Users = () => {
     }, [])
   return (
     <div>
-        <span className='text-2xl font-bold'>Users</span>
+        <span className='text-xl font-semibold'>Users</span>
         <div className='my-3 p-4 bg-white shadow rounded overflow-x-auto'>
             <DataTable columnsArr={['Name', 'Email', 'Role']} data={users} />
         </div>
