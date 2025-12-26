@@ -1,15 +1,39 @@
 import { useEffect, useState } from 'react'
 import api from '../api/axios'
 import Button from '../components/atoms/Button'
+import Upload from '../components/molecules/Upload'
 
 const Settings = () => {
   const [profile, setProfile] = useState(null)
   const [form, setForm] = useState(null)
 
-  const submit = (e) => {
+  const submit = async (e) => {
     e.preventDefault()
     // Handle form submission logic here
     console.log('Form submitted')
+    console.log(form)
+    const res = await api.put('/api/users/profile', form)
+    if (res) {
+      console.log('Profile updated successfully')
+      setProfile(res.data)
+    } else {
+      console.error('Failed to update profile')
+    }
+  }
+
+  const handleAvatarUpload = async (file) => {
+    const formData = new FormData()
+    formData.append('file', file)
+
+    const res = await api.post('/api/upload/avatar', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+      }
+    })
+
+    setProfile(prev => ({ ...prev, avatarUrl: res.data.url }))
+    setForm(prev => ({ ...prev, avatarUrl: res.data.url }))
+    console.log('Avatar uploaded:', res.data.url)
   }
 
   useEffect(() => {
@@ -40,7 +64,9 @@ const Settings = () => {
               <option value="USER">User</option>
               <option value="ADMIN">Admin</option>
             </select>
-            <Button variant='primary'>Save Changes</Button>
+            <label>Upload Avatar</label>
+            <Upload existingImg={form.avatarUrl} onUpload={handleAvatarUpload} />
+            <Button type='submit' variant='primary'>Save Changes</Button>
           </form> : 'Loading...'}
         </div>
       </div>

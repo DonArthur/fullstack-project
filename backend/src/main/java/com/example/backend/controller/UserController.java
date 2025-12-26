@@ -58,7 +58,7 @@ public class UserController {
 
     @PutMapping("/profile")
     public ProfileResponse updateProfile(Authentication authentication, @RequestBody ProfileRequest request) {
-        return  profileService.updateProfile(authentication.getName(), request);
+        return profileService.updateProfile(authentication.getName(), request);
     }
 
     @GetMapping("/debug-auth")
